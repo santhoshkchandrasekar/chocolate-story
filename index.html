@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not so Sweet — The Chocolate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:   #FAF6EF;
+    --gold:    #D4A853;
+    --amber:   #C87830;
+    --brown:   #7A3E10;
+    --dark:    #3D1C00;
+    --soil:    #0F0400;
+    --text:    #2C1400;
+    --muted:   #8B5E2A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--amber);
+    z-index: 100;
+    transition: width 0.05s linear;
+  }
+
+  /* ── SCROLL TRACK ── */
+  #scroll-track {
+    height: 700vh;
+    position: relative;
+  }
+
+  /* ── STICKY CONTAINER ── */
+  #sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--cream);
+    transition: background 0.8s ease;
+    padding: 20px 16px 28px;
+  }
+
+  /* ── EYEBROW ── */
+  #eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    opacity: 1;
+    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
+    max-height: 40px;
+    overflow: hidden;
+  }
+
+  .fade-out {
+    opacity: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
+  }
+
+  /* ── HEADLINE ── */
+  #headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+    transition: color 0.8s, opacity 0.4s, max-height 0.4s, margin 0.4s;
+    max-height: 120px;
+    overflow: hidden;
+  }
+
+  #headline em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  /* ── SUBHEADLINE ── */
+  #subhead {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+    opacity: 1;
+    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
+    max-width: 340px;
+    max-height: 60px;
+    overflow: hidden;
+  }
+
+  #headline {
+    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
+    max-height: 120px;
+    overflow: hidden;
+  }
+
+  /* ── BAR WRAPPER SVG ── */
+  #bar-container {
+    position: relative;
+    width: 220px;
+    height: 340px;
+    flex-shrink: 0;
+    transition: width 0.5s ease, height 0.5s ease;
+  }
+
+  #bar-container.shrunk {
+    width: 160px;
+    height: 248px;
+  }
+
+  #bar-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* ── SCROLL HINT ── */
+  #scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    opacity: 1;
+    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
+    max-height: 60px;
+    overflow: hidden;
+  }
+
+  #scroll-hint span {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 1.5px solid var(--muted);
+    border-bottom: 1.5px solid var(--muted);
+    transform: rotate(45deg);
+    animation: arrowBounce 1.6s ease-in-out infinite;
+  }
+
+  @keyframes arrowBounce {
+    0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+    50% { transform: rotate(45deg) translateY(5px); opacity: 0.4; }
+  }
+
+  /* ── STAT CARDS ── */
+  #stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: min(400px, 88vw);
+    margin-top: 16px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  #stats-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .stat-card {
+    border-radius: 10px;
+    padding: 14px 16px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .stat-card.show { opacity: 1; transform: translateY(0); }
+
+  .stat-card.light {
+    background: rgba(212, 168, 83, 0.15);
+    border: 0.5px solid rgba(212, 168, 83, 0.4);
+  }
+
+  .stat-card.dark-card {
+    background: rgba(61, 28, 0, 0.85);
+    border: 0.5px solid rgba(200, 120, 48, 0.3);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-card.light .stat-num { color: var(--dark); }
+  .stat-card.dark-card .stat-num { color: var(--gold); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .stat-card.light .stat-label { color: var(--brown); }
+  .stat-card.dark-card .stat-label { color: rgba(212, 168, 83, 0.7); }
+
+  /* ── CTA BUTTON ── */
+  #cta {
+    margin-top: 16px;
+    opacity: 0;
+    transition: opacity 0.5s 0.4s;
+    white-space: nowrap;
+  }
+
+  #cta.show { opacity: 1; }
+
+  #cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 120, 48, 0.4);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  #cta a:hover { color: var(--gold); border-color: var(--gold); }
+
+  #cta a::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.2s;
+  }
+
+  #cta a:hover::after { width: 20px; }
+
+  /* ── NEXT SECTION PLACEHOLDER ── */
+  #next-section {
+    min-height: 100vh;
+    background: #E8D5A0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    padding: 80px 24px 60px;
+    position: relative;
+  }
+
+  #next-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    color: var(--dark);
+    text-align: center;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  #next-section p {
+    font-size: 14px;
+    color: var(--brown);
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TRAVELING BAR ── */
+  #traveling-bar {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    width: 160px;
+    height: 248px;
+    pointer-events: none;
+    z-index: 50;
+    display: none;
+    transform: translateX(-50%);
+  }
+
+  /* section 2 bar placeholder — where traveling bar lands */
+  #s2-bar-slot {
+    width: 160px;
+    height: 248px;
+    flex-shrink: 0;
+    margin-bottom: 32px;
+    visibility: hidden;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="scroll-track">
+  <div id="sticky">
+
+    <div id="eyebrow">A data story</div>
+
+    <div id="headline">Not so <em>Sweet</em></div>
+    <div id="headline2" style="font-family:'Playfair Display',serif;font-size:clamp(13px,1.8vw,17px);color:var(--muted);text-align:center;letter-spacing:0.22em;text-transform:uppercase;margin-top:4px;opacity:1;transition:opacity 0.5s">as we go deep — The Chocolate</div>
+
+    <div id="subhead" style="margin-top:20px">Scroll to unwrap the truth behind a $5 bar</div>
+
+    <div id="bar-container">
+      <svg id="bar-svg" viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- CHOCOLATE BAR (always visible underneath) -->
+        <rect x="10" y="10" width="200" height="320" rx="14" fill="#7A3E10"/>
+        <rect x="22" y="22" width="176" height="296" rx="10" fill="#6B3408"/>
+        <!-- center groove -->
+        <line x1="110" y1="22" x2="110" y2="318" stroke="#4A2406" stroke-width="1.5"/>
+        <!-- segments -->
+        <rect x="24" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="118" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="24" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="118" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="24" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="118" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="24" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="118" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+        <rect x="24" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+        <rect x="118" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+
+        <!-- LAYER 4 — darkest — child labour stats -->
+        <g id="layer4" opacity="1">
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#1A0800"/>
+          <text x="110" y="88"  text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#C07030">1.56M</text>
+          <text x="110" y="108" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">children in cocoa production</text>
+          <text x="110" y="122" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">NORC / US Dept of Labor, 2020</text>
+          <text x="110" y="182" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#C07030">+14pp</text>
+          <text x="110" y="202" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">rise in child labour since</text>
+          <text x="110" y="216" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">the 2001 Harkin-Engel promise</text>
+          <text x="110" y="276" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#C07030">4×</text>
+          <text x="110" y="296" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">deadlines broken by</text>
+          <text x="110" y="310" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#7A4010">the chocolate industry</text>
+        </g>
+
+        <!-- LAYER 3 — deep brown — farmer income -->
+        <g id="layer3" opacity="1">
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#5C2800"/>
+          <text x="110" y="88"  text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#FFE0A0">3–6%</text>
+          <text x="110" y="108" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">of bar price reaches</text>
+          <text x="110" y="122" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">the cocoa farmer</text>
+          <text x="110" y="182" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#FFE0A0">$1/day</text>
+          <text x="110" y="202" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">or less — average farmer</text>
+          <text x="110" y="216" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">income in Ivory Coast</text>
+          <text x="110" y="276" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#FFE0A0">2.5M</text>
+          <text x="110" y="296" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">farmers grow 65%</text>
+          <text x="110" y="310" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#FFCF80">of global cocoa supply</text>
+        </g>
+
+        <!-- LAYER 2 — amber — industry stats -->
+        <g id="layer2" opacity="1">
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#C87830"/>
+          <text x="110" y="88"  text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#3D1C00">$130B</text>
+          <text x="110" y="108" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">global chocolate</text>
+          <text x="110" y="122" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">industry revenue</text>
+          <text x="110" y="182" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#3D1C00">5</text>
+          <text x="110" y="202" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">corporations dominate</text>
+          <text x="110" y="216" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">the consumer market</text>
+          <text x="110" y="276" text-anchor="middle" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#3D1C00">3</text>
+          <text x="110" y="296" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">processors control</text>
+          <text x="110" y="310" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5C2E00">60% of global grinding</text>
+        </g>
+
+        <!-- LAYER 1 — gold wrapper — retail face -->
+        <g id="layer1" opacity="1">
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#D4A853"/>
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#E8C060" opacity="0.3"/>
+          <!-- decorative lines -->
+          <line x1="40" y1="90"  x2="180" y2="90"  stroke="#A07028" stroke-width="0.8"/>
+          <line x1="40" y1="250" x2="180" y2="250" stroke="#A07028" stroke-width="0.8"/>
+          <!-- price -->
+          <text x="110" y="158" text-anchor="middle" font-family="'Playfair Display', serif" font-size="56" font-weight="700" fill="#3D1C00">$5</text>
+          <!-- brand name -->
+          <text x="110" y="82"  text-anchor="middle" font-family="'Playfair Display', serif" font-size="14" font-weight="400" fill="#5C3000" letter-spacing="4">CHOCOLATE</text>
+          <!-- details -->
+          <text x="110" y="214" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8"  fill="#A07038" letter-spacing="0.5">West African Cocoa Beans</text>
+          <!-- ingredient box -->
+          <rect x="50" y="226" width="120" height="18" rx="2" fill="none" stroke="#A07028" stroke-width="0.6"/>
+          <text x="110" y="239" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#8B5028">Cocoa mass · Sugar · Cocoa butter</text>
+          <!-- net weight -->
+          <text x="110" y="274" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8"  fill="#8B5028" letter-spacing="1">NET WT 100g</text>
+          <!-- scroll hint on wrapper -->
+          <text x="110" y="308" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="8"  fill="#A07028" letter-spacing="0.5" opacity="0.7">scroll to unwrap ↓</text>
+
+          <!-- fold elements (animated by JS) -->
+          <rect id="fold-top" x="10" y="10"  width="200" height="0"  rx="8" fill="#B08828" opacity="0"/>
+          <rect id="fold-bot" x="10" y="330" width="200" height="0"  rx="8" fill="#B08828" opacity="0"/>
+          <rect id="flap-l"   x="10" y="10"  width="100" height="320" rx="14" fill="#C8A030" opacity="0"/>
+          <rect id="flap-r"   x="110" y="10" width="100" height="320" rx="14" fill="#B89020" opacity="0"/>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- Scroll hint -->
+    <div id="scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+
+    <!-- Stat cards (shown after unwrap) -->
+    <div id="stats-container">
+      <div class="stat-card light" id="sc1">
+        <div class="stat-num">$130B</div>
+        <div class="stat-label">global chocolate industry revenue</div>
+      </div>
+      <div class="stat-card dark-card" id="sc3">
+        <div class="stat-num">3–6%</div>
+        <div class="stat-label">of bar price that reaches the farmer</div>
+      </div>
+    </div>
+
+    <!-- CTA after full reveal -->
+    <div id="cta">
+      <a href="#next-section">Scroll to discover the truth</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRAVELING BAR (fixed, animates into section 2) -->
+<div id="traveling-bar">
+  <svg id="travel-svg" viewBox="0 0 220 340" width="160" height="248" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="10" width="200" height="320" rx="14" fill="#7A3E10"/>
+    <rect x="22" y="22" width="176" height="296" rx="10" fill="#6B3408"/>
+    <line x1="110" y1="22" x2="110" y2="318" stroke="#4A2406" stroke-width="1.5"/>
+    <rect x="24" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="118" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="24" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="118" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="24" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="118" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="24" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="118" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+    <rect x="24" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+    <rect x="118" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+  </svg>
+</div>
+
+<!-- NEXT SECTION PLACEHOLDER -->
+<div id="next-section">
+  <div id="s2-bar-slot"></div>
+  <h2>Where does the money go?</h2>
+  <p>Section 2 — The supply chain reveal</p>
+</div>
+
+<script>
+  const progressBar = document.getElementById('progress-bar');
+  const sticky      = document.getElementById('sticky');
+  const layer1      = document.getElementById('layer1');
+  const layer2      = document.getElementById('layer2');
+  const layer3      = document.getElementById('layer3');
+  const layer4      = document.getElementById('layer4');
+  const foldTop     = document.getElementById('fold-top');
+  const foldBot     = document.getElementById('fold-bot');
+  const flapL       = document.getElementById('flap-l');
+  const flapR       = document.getElementById('flap-r');
+  const eyebrow     = document.getElementById('eyebrow');
+  const subhead     = document.getElementById('subhead');
+  const scrollHint  = document.getElementById('scroll-hint');
+  const statsWrap   = document.getElementById('stats-container');
+  const sc1 = document.getElementById('sc1');
+  const sc3 = document.getElementById('sc3');
+  const cta = document.getElementById('cta');
+  const headline = document.getElementById('headline');
+
+  // layer text elements — fade with their layer
+  const wEls = layer1.querySelectorAll('text, rect:not([id])');
+
+  let revealed = false;
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function phase(t, s, e) { return clamp((t - s) / (e - s), 0, 1); }
+
+  function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function onScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const trackH    = document.getElementById('scroll-track').offsetHeight - window.innerHeight;
+    const t         = clamp(scrollTop / trackH, 0, 1);
+
+    // progress bar
+    progressBar.style.width = (t * 100) + '%';
+
+    // Each layer: in-phase shows it, out-phase hides it fully
+    // Layer 1 gold wrapper: show 0-0.25, hide 0.25-0.45
+    const l1in  = ease(phase(t, 0,    0.25));  // peeling animation progress
+    const l1out = ease(phase(t, 0.25, 0.45));  // fade to 0
+    layer1.style.opacity = clamp(1 - l1out, 0, 1);
+
+    // Fold/flap animation tied to l1in
+    if (l1in > 0.02) {
+      const fh = Math.round(l1in * 65);
+      foldTop.setAttribute('height', fh);
+      foldTop.setAttribute('opacity', Math.min(1, l1in * 3));
+      foldBot.setAttribute('height', fh);
+      foldBot.setAttribute('y', 330 - fh);
+      foldBot.setAttribute('opacity', Math.min(1, l1in * 3));
+      flapL.setAttribute('opacity', Math.min(0.95, l1in * 2));
+      flapR.setAttribute('opacity', Math.min(0.95, l1in * 2));
+      flapL.setAttribute('x', Math.round(10  - l1in * 130));
+      flapR.setAttribute('x', Math.round(110 + l1in * 130));
+    } else {
+      foldTop.setAttribute('opacity', 0);
+      foldBot.setAttribute('opacity', 0);
+      flapL.setAttribute('opacity', 0);
+      flapR.setAttribute('opacity', 0);
+    }
+
+    // Layer 2 amber industry: show 0.25-0.45, hide 0.45-0.62
+    const l2in  = ease(phase(t, 0.25, 0.45));
+    const l2out = ease(phase(t, 0.45, 0.62));
+    layer2.style.opacity = clamp(l2in - l2out, 0, 1);
+
+    // Layer 3 brown farmer: show 0.45-0.62, hide 0.62-0.78
+    const l3in  = ease(phase(t, 0.45, 0.62));
+    const l3out = ease(phase(t, 0.62, 0.78));
+    layer3.style.opacity = clamp(l3in - l3out, 0, 1);
+
+    // Layer 4 dark child labour: show 0.62-0.78, hide 0.78-0.92
+    const l4in  = ease(phase(t, 0.62, 0.78));
+    const l4out = ease(phase(t, 0.78, 0.92));
+    layer4.style.opacity = clamp(l4in - l4out, 0, 1);
+
+    // hide intro text as scroll begins
+    const introFade = clamp(1 - p1 * 3, 0, 1);
+    eyebrow.style.opacity  = introFade;
+    subhead.style.opacity  = introFade;
+    scrollHint.style.opacity = introFade;
+    const h2el = document.getElementById('headline2');
+    if (h2el) h2el.style.opacity = introFade;
+
+    // ── SHOW STAT CARDS after full unwrap ───────────────
+    if (t >= 0.92 && !revealed) {
+      revealed = true;
+      // collapse intro elements to free vertical space
+      eyebrow.classList.add('fade-out');
+      headline.classList.add('fade-out');
+      const hl2 = document.getElementById('headline2');
+      if (hl2) hl2.classList.add('fade-out');
+      subhead.classList.add('fade-out');
+      scrollHint.classList.add('fade-out');
+      document.getElementById('bar-container').classList.add('shrunk');
+      setTimeout(() => {
+        statsWrap.classList.add('visible');
+        setTimeout(() => sc1.classList.add('show'), 80);
+        setTimeout(() => sc3.classList.add('show'), 260);
+        setTimeout(() => cta.classList.add('show'),  500);
+      }, 200);
+    }
+
+    if (t < 0.85 && revealed) {
+      revealed = false;
+      statsWrap.classList.remove('visible');
+      [sc1, sc3].forEach(c => c.classList.remove('show'));
+      cta.classList.remove('show');
+      eyebrow.classList.remove('fade-out');
+      headline.classList.remove('fade-out');
+      const hl2b = document.getElementById('headline2');
+      if (hl2b) hl2b.classList.remove('fade-out');
+      subhead.classList.remove('fade-out');
+      scrollHint.classList.remove('fade-out');
+      document.getElementById('bar-container').classList.remove('shrunk');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ── TRAVELING BAR ────────────────────────────────────────────────
+  // Uses screen coordinates via getBoundingClientRect — works correctly
+  // regardless of iframe/fixed positioning context.
+  // TRAVEL_START_PX = scrollY where section1 sticky track ends = 500vh - 100vh = 400vh
+
+  const travelBar = document.getElementById('traveling-bar');
+  const s2slot    = document.getElementById('s2-bar-slot');
+  const barCont2  = document.getElementById('bar-container');
+
+  const TRAVEL_START_PX = window.innerHeight * 4; // 400vh — s1 track ends at 500vh, sticky ends 1vh before
+  const TRAVEL_DIST_PX  = window.innerHeight;     // travel over exactly 1 viewport of scroll
+
+  function easeTravel(p) {
+    return p < 0.5 ? 2*p*p : -1+(4-2*p)*p;
+  }
+
+  function updateTravelBar() {
+    const scrollY = window.pageYOffset;
+
+    if (scrollY < TRAVEL_START_PX) {
+      // Still in section 1
+      barCont2.style.opacity = '';
+      travelBar.style.display = 'none';
+      s2slot.style.visibility = 'hidden';
+      return;
+    }
+
+    // Section 1 sticky has ended — hide static bar, show traveling bar
+    barCont2.style.opacity = '0';
+    travelBar.style.display = 'block';
+
+    const raw      = (scrollY - TRAVEL_START_PX) / TRAVEL_DIST_PX;
+    const progress = Math.max(0, Math.min(1, raw));
+    const eased    = easeTravel(progress);
+
+    // startTop: screen center (bar height 248px, so center = vh/2 - 124)
+    const startTop = window.innerHeight / 2 - 124;
+
+    // endTop: use s2slot's live screen position
+    const slotRect = s2slot.getBoundingClientRect();
+    const endTop   = slotRect.top;
+
+    const currentTop = Math.round(startTop + (endTop - startTop) * eased);
+
+    travelBar.style.top       = currentTop + 'px';
+    travelBar.style.left      = '50%';
+    travelBar.style.transform = 'translateX(-50%)';
+    travelBar.style.opacity   = String(Math.min(1, progress * 3)); // fade in quickly
+
+    if (progress >= 0.98) {
+      travelBar.style.display  = 'none';
+      s2slot.style.visibility  = 'visible';
+      barCont2.style.opacity   = '0';
+    } else {
+      s2slot.style.visibility = 'hidden';
+    }
+  }
+
+  window.addEventListener('scroll', updateTravelBar, { passive: true });
+  window.addEventListener('resize', updateTravelBar, { passive: true });
+  updateTravelBar();
+</script>
+</body>
+</html>
