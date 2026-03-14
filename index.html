@@ -60,22 +60,7 @@
     overflow: hidden;
     background: var(--cream);
     transition: background 0.8s ease;
-    padding: 20px 16px 28px;
-  }
-
-  /* ── EYEBROW ── */
-  #eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-    opacity: 1;
-    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
-    max-height: 40px;
-    overflow: hidden;
+    padding: 12px 16px 20px;
   }
 
   .fade-out {
@@ -88,16 +73,16 @@
   /* ── HEADLINE ── */
   #headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 6vw, 72px);
+    font-size: clamp(28px, 5vw, 60px);
     font-weight: 700;
     color: var(--text);
     text-align: center;
-    line-height: 1.1;
-    margin-bottom: 8px;
+    line-height: 1.15;
+    margin-bottom: 6px;
     letter-spacing: -0.02em;
     transition: color 0.8s, opacity 0.4s, max-height 0.4s, margin 0.4s;
-    max-height: 120px;
-    overflow: hidden;
+    max-height: 160px;
+    overflow: visible;
   }
 
   #headline em {
@@ -117,12 +102,6 @@
     transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
     max-width: 340px;
     max-height: 60px;
-    overflow: hidden;
-  }
-
-  #headline {
-    transition: opacity 0.4s, max-height 0.4s, margin 0.4s;
-    max-height: 120px;
     overflow: hidden;
   }
 
@@ -277,10 +256,36 @@
 
   #cta a:hover::after { width: 20px; }
 
-  /* ── NEXT SECTION PLACEHOLDER ── */
-  #next-section {
-    min-height: 100vh;
+  /* ── SECTION 2 WRAPPER ── */
+  #s2-wrap {
+    display: flex;
+    align-items: flex-start;
     background: #E8D5A0;
+    min-height: 100vh;
+  }
+
+  #s2-bar-sticky {
+    position: sticky;
+    top: calc(50vh - 124px);
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+
+  #s2-bar-sticky.visible {
+    opacity: 1;
+  }
+
+  /* ── SECTION 2 ── */
+  #next-section {
+    flex: 1;
+    min-height: 100vh;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -307,38 +312,16 @@
     letter-spacing: 0.05em;
   }
 
-  /* ── TRAVELING BAR ── */
-  #traveling-bar {
-    position: fixed;
-    left: 50%;
-    top: 0;
-    width: 160px;
-    height: 248px;
-    pointer-events: none;
-    z-index: 50;
-    display: none;
-    transform: translateX(-50%);
-  }
 
-  /* section 2 bar placeholder — where traveling bar lands */
-  #s2-bar-slot {
-    width: 160px;
-    height: 248px;
-    flex-shrink: 0;
-    margin-bottom: 32px;
-    visibility: hidden;
-    flex-shrink: 0;
-  }
 </style>
 </head>
 <body>
 
 <div id="progress-bar"></div>
 
+<div id="wrapper">
 <div id="scroll-track">
   <div id="sticky">
-
-    <div id="eyebrow">A data story</div>
 
     <div id="headline">Not so <em>Sweet</em></div>
     <div id="headline2" style="font-family:'Playfair Display',serif;font-size:clamp(13px,1.8vw,17px);color:var(--muted);text-align:center;letter-spacing:0.22em;text-transform:uppercase;margin-top:4px;opacity:1;transition:opacity 0.5s">as we go deep — The Chocolate</div>
@@ -464,30 +447,31 @@
   </div>
 </div>
 
-<!-- TRAVELING BAR (fixed, animates into section 2) -->
-<div id="traveling-bar">
-  <svg id="travel-svg" viewBox="0 0 220 340" width="160" height="248" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="10" width="200" height="320" rx="14" fill="#7A3E10"/>
-    <rect x="22" y="22" width="176" height="296" rx="10" fill="#6B3408"/>
-    <line x1="110" y1="22" x2="110" y2="318" stroke="#4A2406" stroke-width="1.5"/>
-    <rect x="24" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="118" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="24" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="118" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="24" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="118" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="24" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="118" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
-    <rect x="24" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
-    <rect x="118" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
-  </svg>
-</div>
+</div><!-- end wrapper -->
 
-<!-- NEXT SECTION PLACEHOLDER -->
-<div id="next-section">
-  <div id="s2-bar-slot"></div>
-  <h2>Where does the money go?</h2>
-  <p>Section 2 — The supply chain reveal</p>
+<!-- SECTION 2 -->
+<div id="s2-wrap">
+  <div id="s2-bar-sticky">
+    <svg viewBox="0 0 220 340" width="160" height="248" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="200" height="320" rx="14" fill="#7A3E10"/>
+      <rect x="22" y="22" width="176" height="296" rx="10" fill="#6B3408"/>
+      <line x1="110" y1="22" x2="110" y2="318" stroke="#4A2406" stroke-width="1.5"/>
+      <rect x="24" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="118" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="24" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="118" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="24" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="118" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="24" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="118" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+      <rect x="24" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+      <rect x="118" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+    </svg>
+  </div>
+  <div id="next-section">
+    <h2>Where does the money go?</h2>
+    <p>Section 2 — The supply chain reveal</p>
+  </div>
 </div>
 
 <script>
@@ -501,7 +485,6 @@
   const foldBot     = document.getElementById('fold-bot');
   const flapL       = document.getElementById('flap-l');
   const flapR       = document.getElementById('flap-r');
-  const eyebrow     = document.getElementById('eyebrow');
   const subhead     = document.getElementById('subhead');
   const scrollHint  = document.getElementById('scroll-hint');
   const statsWrap   = document.getElementById('stats-container');
@@ -570,7 +553,6 @@
 
     // hide intro text as scroll begins
     const introFade = clamp(1 - p1 * 3, 0, 1);
-    eyebrow.style.opacity  = introFade;
     subhead.style.opacity  = introFade;
     scrollHint.style.opacity = introFade;
     const h2el = document.getElementById('headline2');
@@ -580,7 +562,6 @@
     if (t >= 0.92 && !revealed) {
       revealed = true;
       // collapse intro elements to free vertical space
-      eyebrow.classList.add('fade-out');
       headline.classList.add('fade-out');
       const hl2 = document.getElementById('headline2');
       if (hl2) hl2.classList.add('fade-out');
@@ -600,7 +581,6 @@
       statsWrap.classList.remove('visible');
       [sc1, sc3].forEach(c => c.classList.remove('show'));
       cta.classList.remove('show');
-      eyebrow.classList.remove('fade-out');
       headline.classList.remove('fade-out');
       const hl2b = document.getElementById('headline2');
       if (hl2b) hl2b.classList.remove('fade-out');
@@ -613,67 +593,17 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ── TRAVELING BAR ────────────────────────────────────────────────
-  // Uses screen coordinates via getBoundingClientRect — works correctly
-  // regardless of iframe/fixed positioning context.
-  // TRAVEL_START_PX = scrollY where section1 sticky track ends = 500vh - 100vh = 400vh
-
-  const travelBar = document.getElementById('traveling-bar');
-  const s2slot    = document.getElementById('s2-bar-slot');
-  const barCont2  = document.getElementById('bar-container');
-
-  const TRAVEL_START_PX = window.innerHeight * 4; // 400vh — s1 track ends at 500vh, sticky ends 1vh before
-  const TRAVEL_DIST_PX  = window.innerHeight;     // travel over exactly 1 viewport of scroll
-
-  function easeTravel(p) {
-    return p < 0.5 ? 2*p*p : -1+(4-2*p)*p;
+  // ── SECTION 2 BAR — fade in when section 2 enters viewport ────
+  const s2BarSticky = document.getElementById('s2-bar-sticky');
+  if (s2BarSticky) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) s2BarSticky.classList.add('visible');
+        else s2BarSticky.classList.remove('visible');
+      });
+    }, { threshold: 0.1 });
+    obs.observe(document.getElementById('s2-wrap'));
   }
-
-  function updateTravelBar() {
-    const scrollY = window.pageYOffset;
-
-    if (scrollY < TRAVEL_START_PX) {
-      // Still in section 1
-      barCont2.style.opacity = '';
-      travelBar.style.display = 'none';
-      s2slot.style.visibility = 'hidden';
-      return;
-    }
-
-    // Section 1 sticky has ended — hide static bar, show traveling bar
-    barCont2.style.opacity = '0';
-    travelBar.style.display = 'block';
-
-    const raw      = (scrollY - TRAVEL_START_PX) / TRAVEL_DIST_PX;
-    const progress = Math.max(0, Math.min(1, raw));
-    const eased    = easeTravel(progress);
-
-    // startTop: screen center (bar height 248px, so center = vh/2 - 124)
-    const startTop = window.innerHeight / 2 - 124;
-
-    // endTop: use s2slot's live screen position
-    const slotRect = s2slot.getBoundingClientRect();
-    const endTop   = slotRect.top;
-
-    const currentTop = Math.round(startTop + (endTop - startTop) * eased);
-
-    travelBar.style.top       = currentTop + 'px';
-    travelBar.style.left      = '50%';
-    travelBar.style.transform = 'translateX(-50%)';
-    travelBar.style.opacity   = String(Math.min(1, progress * 3)); // fade in quickly
-
-    if (progress >= 0.98) {
-      travelBar.style.display  = 'none';
-      s2slot.style.visibility  = 'visible';
-      barCont2.style.opacity   = '0';
-    } else {
-      s2slot.style.visibility = 'hidden';
-    }
-  }
-
-  window.addEventListener('scroll', updateTravelBar, { passive: true });
-  window.addEventListener('resize', updateTravelBar, { passive: true });
-  updateTravelBar();
 </script>
 </body>
 </html>
