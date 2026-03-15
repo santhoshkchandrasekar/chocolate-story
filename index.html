@@ -115,9 +115,8 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
 .s3-body{font-size:15px;font-weight:300;color:rgba(255,235,190,0.82);line-height:1.8;margin-bottom:20px}
 .s3-body strong{color:#FFD080;font-weight:500}
 .s3-scroll-panel.p1{background:#C4854A;padding-top:32px}
-.s3-scroll-panel.p2{background:linear-gradient(to bottom,#C4854A 0%,#A06028 18%,#A06028 100%)}
-.s3-scroll-panel.p3{background:#7A3E10}
-.s3-scroll-panel.p4{background:#5C2800}
+.s3-scroll-panel.p2{background:linear-gradient(to bottom,#C4854A 0%,#A06028 22%,#7A3E10 70%,#5C2800 100%)}
+.s3-scroll-panel.p3{background:#3D1C00}
 #s3-dw{border:1.5px dashed rgba(255,200,80,0.35);border-radius:12px;padding:28px 24px;background:rgba(0,0,0,0.15);text-align:center;margin-top:8px}
 
 /* Promise timeline */
@@ -135,6 +134,14 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
 .s3-scroll-panel.in-view .s3-fig-col{opacity:1;transform:translateY(0);transition-delay:0.15s}
 .s3-scroll-panel.chart-only{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s}
 .s3-scroll-panel.chart-only.in-view{opacity:1;transform:translateY(0)}
+
+/* ── S4 CLOSING ── */
+.s4-solution-card{background:rgba(255,255,255,0.04);border:1px solid rgba(212,168,83,0.15);border-radius:14px;padding:28px 26px;border-top:3px solid var(--accent);transition:transform 0.25s,background 0.25s;text-align:center}
+.s4-solution-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.07)}
+.s4-card-icon{font-size:26px;margin-bottom:14px}
+.s4-card-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:rgba(255,240,200,0.95);margin-bottom:10px}
+.s4-card-body{font-size:13px;color:rgba(255,225,175,0.6);line-height:1.75;margin-bottom:14px}
+.s4-card-tag{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);opacity:0.7}
 </style>
 </head>
 <body>
@@ -615,10 +622,10 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
         </div>
       </div>
 
-      <!-- ── CHART 1: WHERE EVERY $5 GOES — Datawrapper Stacked Bar ── -->
-      <div id="dw-chart-placeholder" style="max-width:680px;width:100%;margin-top:20px;opacity:0;transform:translateY(12px);transition:opacity 0.7s,transform 0.7s">
-        <div style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Where every $5 goes</div>
-        <iframe title="" aria-label="Stacked Bars" id="datawrapper-chart-OgHEk" src="https://datawrapper.dwcdn.net/OgHEk/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="89" data-external="1"></iframe>
+      <!-- ── CHART 1: WHERE EVERY $5 GOES — Datawrapper ── -->
+      <div id="dw-chart-placeholder" style="max-width:680px;width:100%;margin-top:16px;opacity:0;transform:translateY(12px);transition:opacity 0.7s,transform 0.7s">
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Where every $5 goes</div>
+        <iframe title="" aria-label="Stacked Bars" id="datawrapper-chart-OgHEk" src="https://datawrapper.dwcdn.net/OgHEk/2/" scrolling="no" frameborder="0" style="width:0;min-width:100%!important;border:none;" height="89" data-external="1"></iframe>
         <script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>
         <div style="font-size:11px;color:var(--muted);margin-top:6px;opacity:0.6">Source: Make Chocolate Fair · Fairtrade Foundation · ICCO</div>
       </div>
@@ -733,63 +740,304 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
       </div>
     </div>
 
-  </div>
+    <!-- ── Betrayal: merged into same panel ── -->
+    <div style="margin-top:64px;width:100%;padding-top:56px">
 
-  <!-- Panel 3: Broken promises -->
-  <div class="s3-scroll-panel p3" id="s3p3">
-    <div class="s3-text-col">
-      <div class="s3-eyebrow">The consequence — betrayal</div>
-      <div class="s3-stat"><em>4</em> promises.</div>
-      <div class="s3-label">All broken. The farmer is still waiting.</div>
-      <div class="promise-track">
-        <div class="promise-row">
-          <div class="promise-year">2001</div>
-          <div class="promise-bar" style="background:rgba(255,200,80,0.45);flex:0.2"></div>
-          <div class="promise-label" style="color:#FFD080;font-weight:600">Protocol signed</div>
-        </div>
-        <div class="promise-row">
-          <div class="promise-year">2005</div>
-          <div class="promise-bar broken"></div>
-          <div class="promise-label">Deadline missed</div>
-        </div>
-        <div class="promise-row">
-          <div class="promise-year">2008</div>
-          <div class="promise-bar broken"></div>
-          <div class="promise-label">Deadline missed</div>
-        </div>
-        <div class="promise-row">
-          <div class="promise-year">2010</div>
-          <div class="promise-bar broken"></div>
-          <div class="promise-label">Deadline missed</div>
-        </div>
-        <div class="promise-row">
-          <div class="promise-year">2020</div>
-          <div class="promise-bar broken"></div>
-          <div class="promise-label">Deadline missed</div>
-        </div>
-        <div class="promise-row" style="margin-top:4px">
-          <div class="promise-year" style="color:rgba(255,200,150,0.5);font-size:14px">2024</div>
-          <div class="promise-bar" style="background:rgba(255,80,80,0.25)"></div>
-          <div class="promise-label" style="color:rgba(255,120,120,0.7)">+14pp children</div>
+      <!-- Section headline -->
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="s3-eyebrow" style="opacity:0.7">The consequence — betrayal</div>
+        <div class="s3-stat" style="font-size:clamp(36px,4.5vw,64px)"><em>4</em> promises.</div>
+        <div class="s3-label">All broken. The farmer is still waiting.</div>
+        <div style="max-width:620px;margin:18px auto 0;font-family:'DM Sans',sans-serif;font-size:clamp(13px,1.1vw,15px);color:rgba(255,235,190,0.65);line-height:1.75">
+          In 2001, the world's largest chocolate companies — including Mars, Nestlé, and Hershey — signed the <strong style="color:rgba(255,210,130,0.85)">Harkin-Engel Protocol</strong>, a voluntary pledge to eliminate the worst forms of child labour from their West African cocoa supply chains. They set their own deadlines. They missed every one.
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Panel 4: Face to face + DW chart -->
-  <div class="s3-scroll-panel p4" id="s3p4">
-    <div class="s3-text-col">
-      <div class="s3-eyebrow">The data — child labour over time</div>
-      <div class="s3-stat" style="font-size:clamp(28px,3.5vw,46px);line-height:1.2;margin-bottom:12px">Now you're<br><em>face to face.</em></div>
-      <div class="s3-body">This is the person the $130 billion industry was built on. The chart below shows how child labour changed against every broken deadline.</div>
-      <div id="s3-dw">
-        <div style="font-size:22px;margin-bottom:8px;opacity:0.5">📊</div>
-        <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:rgba(255,240,200,0.9);margin-bottom:6px">Datawrapper Chart</div>
-        <div style="font-size:12px;color:rgba(255,220,160,0.6);line-height:1.6">Paste child labour timeline embed here.<br>Built from <strong>Tab 2</strong> of your Excel data.</div>
+      <!-- ── Datawrapper placeholder: Revenue vs Broken Deadlines ── -->
+      <div style="border:2px dashed rgba(255,200,80,0.3);border-radius:14px;padding:36px 28px;background:rgba(0,0,0,0.15);text-align:center">
+
+        <!-- Platform badge -->
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,83,0.12);border:1px solid rgba(212,168,83,0.3);border-radius:20px;padding:5px 14px;margin-bottom:20px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:0.8"><rect x="2" y="12" width="4" height="10" rx="1" fill="#D4A853"/><rect x="10" y="7" width="4" height="15" rx="1" fill="#D4A853"/><rect x="18" y="2" width="4" height="20" rx="1" fill="#D4A853"/></svg>
+          <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#D4A853;letter-spacing:0.06em;text-transform:uppercase">Datawrapper</span>
+        </div>
+
+        <!-- Chart title -->
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(15px,1.4vw,18px);font-weight:700;color:rgba(255,240,200,0.9);margin-bottom:6px">
+          Industry Revenue vs. Broken Deadlines, 2001–2024
+        </div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,220,160,0.55);margin-bottom:24px;line-height:1.6">
+          Annotated area chart — global chocolate industry revenue ($B) with deadline markers pinned at 2001, 2005, 2008, 2010, 2020, 2024
+        </div>
+
+        <!-- Build instructions -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;max-width:580px;margin:0 auto 24px">
+          <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+            <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Chart type</div>
+            <div style="font-size:12px;color:rgba(255,235,190,0.7);line-height:1.5">Area chart (Lines, Bars & Pies)<br>with custom annotations</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+            <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Data source</div>
+            <div style="font-size:12px;color:rgba(255,235,190,0.7);line-height:1.5">Tab 2 (deadlines) + Statista<br>chocolate market revenue</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+            <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Annotations to add</div>
+            <div style="font-size:12px;color:rgba(255,235,190,0.7);line-height:1.5">✓ 2001 "Protocol signed"<br>✕ 2005, 2008, 2010, 2020 missed<br>⚠ 2024 "+14pp children"</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+            <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Styling</div>
+            <div style="font-size:12px;color:rgba(255,235,190,0.7);line-height:1.5">Dark bg #3D1C00 · Area fill #D4A853<br>Missed markers in red #FF5050</div>
+          </div>
+        </div>
+
+        <div style="font-size:11px;color:rgba(255,200,150,0.35);font-style:italic">Paste Datawrapper embed code here once published · set background to transparent</div>
       </div>
-    </div>
+
+      <!-- Industry callout -->
+      <div style="margin-top:20px;padding:22px 28px;background:rgba(0,0,0,0.2);border-radius:10px;border-left:4px solid rgba(255,80,80,0.45);display:flex;justify-content:space-between;align-items:center;gap:32px">
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(14px,1.3vw,17px);color:rgba(255,235,190,0.9);line-height:1.7">
+          The industry that signed this protocol in 2001 generated <strong style="color:#FFD080">$130 billion in revenue</strong> last year. The protocol cost them nothing. The children paid for it.
+        </div>
+        <div style="flex-shrink:0;text-align:center">
+          <div style="font-size:clamp(22px,2.5vw,32px);font-weight:900;color:rgba(255,100,100,0.85);font-family:'Playfair Display',serif;line-height:1">0 of 4</div>
+          <div style="font-size:11px;color:rgba(255,180,150,0.5);margin-top:4px;letter-spacing:0.04em">deadlines met</div>
+        </div>
+      </div>
+
+  </div><!-- end panel 2 + betrayal -->
 
 </div><!-- end s3 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLOSING SECTION — THE CLIMAX
+     Beat 1: The Reckoning  |  Beat 2: The Fix  |  Beat 3: The Bar
+════════════════════════════════════════════════════════════════════ -->
+<div id="s4">
+
+  <!-- ── BEAT 1: THE RECKONING ── -->
+  <div class="s4-panel" id="s4p1" style="background:linear-gradient(to bottom,#5C2800,#3A1600 25%,#1A0800 60%,#0F0400);padding:80px 8vw;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+
+    <div style="max-width:900px;margin:0 auto;width:100%">
+      <!-- Eyebrow + headline -->
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(212,168,83,0.6);margin-bottom:16px">The reckoning</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,58px);font-weight:700;color:#FAF6EF;line-height:1.1;margin-bottom:12px">
+        They had the money.<br><em style="color:#D4A853">They made a choice.</em>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.2vw,16px);color:rgba(255,235,190,0.55);max-width:580px;line-height:1.8;margin-bottom:48px;margin-left:auto;margin-right:auto">
+        The five brands below collectively earned <strong style="color:rgba(255,210,130,0.8)">$66 billion</strong> in revenue last year. Each one signed the Harkin-Engel Protocol. Each one missed every deadline. Below is what they chose to pay — and what a living wage would have cost them.
+      </div>
+
+      <!-- Flourish waffle placeholder — Beat 1 -->
+      <div style="margin-top:8px">
+
+        <div style="text-align:center;margin-bottom:20px">
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,28px);font-weight:700;color:#FAF6EF;line-height:1.2;margin-bottom:8px">
+            1 square. <em style="color:#FF5050">That's all it would cost.</em>
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,235,190,0.45);line-height:1.6">
+            Each square = $1.3B · 100 squares = $130B industry revenue · Red square = cost to close every farmer's wage gap
+          </div>
+        </div>
+
+        <div style="border:2px dashed rgba(255,80,80,0.25);border-radius:14px;padding:36px 28px;background:rgba(0,0,0,0.18);text-align:center">
+
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,83,0.1);border:1px solid rgba(212,168,83,0.25);border-radius:20px;padding:5px 14px;margin-bottom:20px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D4A853" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="#D4A853" stroke-width="2" stroke-linecap="round"/></svg>
+            <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:#D4A853;letter-spacing:0.06em;text-transform:uppercase">Flourish</span>
+          </div>
+
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(15px,1.4vw,18px);font-weight:700;color:rgba(255,240,200,0.9);margin-bottom:6px">
+            Waffle Chart — $130B Industry · 1 Red Square
+          </div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,220,160,0.5);margin-bottom:28px;line-height:1.6">
+            100 equal squares · each = $1.3B · square #1 colored red = cost to close wage gap
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;max-width:560px;margin:0 auto 24px">
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+              <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Template</div>
+              <div style="font-size:12px;color:rgba(255,235,190,0.65);line-height:1.5">Flourish → Waffle chart<br>10×10 grid layout</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+              <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Data setup</div>
+              <div style="font-size:12px;color:rgba(255,235,190,0.65);line-height:1.5">2 rows: "Fix cost" = 1,<br>"Revenue" = 99</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+              <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Colors</div>
+              <div style="font-size:12px;color:rgba(255,235,190,0.65);line-height:1.5">Fix cost → <span style="color:#FF5050">#FF4040</span><br>Revenue → <span style="color:#D4A853">#D4A853</span> at 40% opacity</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px 16px">
+              <div style="font-size:10px;font-weight:700;color:#D4A853;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Styling</div>
+              <div style="font-size:12px;color:rgba(255,235,190,0.65);line-height:1.5">Background #0F0400<br>Square padding 3px · no border</div>
+            </div>
+          </div>
+
+          <div style="font-size:11px;color:rgba(255,200,150,0.3);font-style:italic">Paste Flourish embed here once published · set background transparent · responsive width</div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;justify-content:center;gap:40px;font-family:'DM Sans',sans-serif">
+          <div style="text-align:center">
+            <div style="font-size:clamp(22px,2.5vw,32px);font-weight:700;color:#D4A853;font-family:'Playfair Display',serif">$130B</div>
+            <div style="font-size:11px;color:rgba(255,235,190,0.35);margin-top:3px;letter-spacing:0.04em">industry revenue / yr</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:clamp(22px,2.5vw,32px);font-weight:700;color:#FF5050;font-family:'Playfair Display',serif">$1.3B</div>
+            <div style="font-size:11px;color:rgba(255,100,100,0.4);margin-top:3px;letter-spacing:0.04em">cost to fix · every farmer · forever</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:clamp(22px,2.5vw,32px);font-weight:700;color:rgba(255,150,150,0.6);font-family:'Playfair Display',serif">23 yrs</div>
+            <div style="font-size:11px;color:rgba(255,100,100,0.3);margin-top:3px;letter-spacing:0.04em">they chose not to</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── BEAT 2: THE FIX ── -->
+  <div class="s4-panel" id="s4p2" style="background:linear-gradient(to bottom,#0F0400,#0A0300);padding:80px 8vw;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+
+    <div style="max-width:960px;margin:0 auto;width:100%">
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(212,168,83,0.6);margin-bottom:16px">How this gets solved</div>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,52px);font-weight:700;color:#FAF6EF;line-height:1.15;margin-bottom:14px">
+        The problem is known.<br><em style="color:#D4A853">So are the solutions.</em>
+      </div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.2vw,16px);color:rgba(255,235,190,0.5);max-width:560px;line-height:1.8;margin-bottom:56px;margin-left:auto;margin-right:auto">
+        None of these require a revolution. They require the industry to honour commitments it already made — and governments to stop waiting for it to self-regulate.
+      </div>
+
+      <!-- 4 solution cards -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+
+        <!-- Card 1 -->
+        <div class="s4-solution-card" style="--accent:#D4A853">
+          <div class="s4-card-icon">💰</div>
+          <div class="s4-card-title">Living Wage Certification</div>
+          <div class="s4-card-body">Fairtrade and Rainforest Alliance certifications guarantee a price floor above survival level. Currently only <strong>~8%</strong> of cocoa is certified. Brands choosing certified sourcing directly raise farmer income.</div>
+          <div class="s4-card-tag">Works now · 8% certified today</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="s4-solution-card" style="--accent:#C87830">
+          <div class="s4-card-icon">⚖️</div>
+          <div class="s4-card-title">Mandatory Due Diligence Laws</div>
+          <div class="s4-card-body">The EU Corporate Sustainability Due Diligence Directive (CSDDD) requires companies to identify and address human rights risks in their supply chains — including child labour. Voluntary pledges have failed. Law has teeth.</div>
+          <div class="s4-card-tag">EU CSDDD · Enforcement begins 2027</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="s4-solution-card" style="--accent:#A06028">
+          <div class="s4-card-icon">🤝</div>
+          <div class="s4-card-title">Direct Trade Models</div>
+          <div class="s4-card-body">Some craft chocolate makers bypass traders entirely, paying farmers 3–5× the commodity price. This model is small-scale today but proves the supply chain can be restructured without the industry losing profitability.</div>
+          <div class="s4-card-tag">Proven model · Scalable</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="s4-solution-card" style="--accent:#7A3E10">
+          <div class="s4-card-icon">📢</div>
+          <div class="s4-card-title">Consumer & Investor Pressure</div>
+          <div class="s4-card-body">Brands respond to reputational risk faster than regulation. Sustained public pressure — through purchasing choices, shareholder votes, and social media — has historically moved corporate supply chain policy more quickly than lobbying.</div>
+          <div class="s4-card-tag">Consumer leverage · Proven track record</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── BEAT 3: THE BAR RETURNS ── -->
+  <div class="s4-panel" id="s4p3" style="background:var(--cream);padding:80px 8vw 100px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center">
+
+    <div style="max-width:800px;width:100%;text-align:center">
+
+      <!-- Bar returns -->
+      <div style="margin-bottom:40px;opacity:0;transform:translateY(20px);transition:opacity 0.9s ease,transform 0.9s ease" id="closing-bar">
+        <svg viewBox="0 0 220 340" width="110" height="170" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 8px 24px rgba(90,40,0,0.18))">
+          <rect x="10" y="10" width="200" height="320" rx="14" fill="#7A3E10"/>
+          <rect x="22" y="22" width="176" height="296" rx="10" fill="#6B3408"/>
+          <rect x="24" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="118" y="40"  width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="24" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="118" y="102" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="24" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="118" y="164" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="24" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="118" y="226" width="78" height="52" rx="4" fill="#5C2C06"/>
+          <rect x="24" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+          <rect x="118" y="278" width="78" height="30" rx="4" fill="#5C2C06"/>
+        </svg>
+      </div>
+
+      <!-- Closing headline -->
+      <div style="opacity:0;transform:translateY(20px);transition:opacity 0.9s ease 0.2s,transform 0.9s ease 0.2s" id="closing-headline">
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px">You started with a bar.</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:16px">
+          The wrapper hasn't changed.<br><em style="color:var(--amber)">Now you know what's inside it.</em>
+        </div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:clamp(14px,1.2vw,16px);color:var(--muted);max-width:480px;margin:0 auto 48px;line-height:1.8">
+          Every bar carries the same story. What changes is what you do with it.
+        </div>
+      </div>
+
+      <!-- Soft action cards -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;opacity:0;transform:translateY(20px);transition:opacity 0.9s ease 0.4s,transform 0.9s ease 0.4s" id="closing-actions">
+
+        <div style="background:#FAF0E0;border-radius:14px;padding:28px 22px;text-align:left;border:1px solid rgba(200,120,48,0.15)">
+          <div style="font-size:24px;margin-bottom:14px">🛒</div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Buy certified</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">Look for Fairtrade, Rainforest Alliance, or Direct Trade labels. Certified bars pay farmers above the poverty line.</div>
+        </div>
+
+        <div style="background:#FAF0E0;border-radius:14px;padding:28px 22px;text-align:left;border:1px solid rgba(200,120,48,0.15)">
+          <div style="font-size:24px;margin-bottom:14px">✉️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Write to a brand</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">Mars, Nestlé, Mondelēz, Hershey, Ferrero — ask them publicly when they will meet their 2001 promise. Brands track this.</div>
+        </div>
+
+        <div style="background:#FAF0E0;border-radius:14px;padding:28px 22px;text-align:left;border:1px solid rgba(200,120,48,0.15)">
+          <div style="font-size:24px;margin-bottom:14px">🔗</div>
+          <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px">Share this story</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">The industry relies on consumers not knowing. Every person who reads this is one fewer person they can count on staying silent.</div>
+        </div>
+
+      </div>
+
+      <!-- Final source line -->
+      <div style="margin-top:56px;font-size:11px;color:rgba(139,94,42,0.4);line-height:1.8;opacity:0;transition:opacity 1s ease 0.6s" id="closing-source">
+        Data sources: ICCO · ILO · Fairtrade International · EU CSDDD · Statista · Payson Center surveys · Harkin-Engel Protocol (2001)
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end s4 -->
+
+<script>
+// ── Closing section fade-ins on scroll ──
+const closingEls = ['closing-bar','closing-headline','closing-actions','closing-source'];
+const closingObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+},{threshold:0.25});
+closingEls.forEach(id=>{ const el=document.getElementById(id); if(el) closingObs.observe(el); });
+
+// ── S4 nav dot highlight ──
+const s4 = document.getElementById('s4');
+if(s4){
+  const s4obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const nav = document.getElementById('site-nav');
+      if(e.isIntersecting){ if(nav) nav.classList.remove('dark'); }
+      else { if(nav) nav.classList.add('dark'); }
+    });
+  },{threshold:0.1});
+  s4obs.observe(document.getElementById('s4p3'));
+}
+</script>
 
 
 
