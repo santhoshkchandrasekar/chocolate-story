@@ -89,7 +89,7 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
 #s3-map-intro .map-eyebrow{font-size:14px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;text-align:center;display:inline-block;padding-bottom:7px;border-bottom:2.5px solid var(--amber)}
 #s3-map-intro .map-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,58px);font-weight:700;color:var(--dark);line-height:1.15;text-align:center;margin-bottom:10px}
 #s3-map-intro .map-title em{font-style:italic;color:var(--amber)}
-#s3-map-intro .map-sub{font-size:15px;font-weight:300;color:var(--muted);text-align:center;max-width:520px;line-height:1.75;margin-bottom:40px}
+#s3-map-intro .map-sub{font-size:15px;font-weight:300;color:var(--muted);text-align:center;max-width:100%;line-height:1.75;margin:0 auto 40px;}
 .flourish-placeholder{width:100%;max-width:900px;border:2px dashed rgba(200,120,48,0.45);border-radius:14px;background:rgba(232,213,160,0.35);padding:56px 32px;text-align:center}
 .flourish-placeholder .fp-icon{font-size:36px;margin-bottom:12px;opacity:0.55}
 .flourish-placeholder .fp-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:8px}
@@ -469,8 +469,8 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
 <!-- ══ S3 MAP INTRO — Where Cocoa Is Grown ══ -->
 <div id="s3-map-intro">
   <div class="map-eyebrow">The origin — where it all begins</div>
-  <h2 class="map-title">65% of the world's cocoa<br>comes from <em>two countries.</em></h2>
-  <p class="map-sub">Ivory Coast and Ghana together supply nearly two thirds of global cocoa production. This is where the chain starts.</p>
+  <h2 class="map-title" style="white-space:nowrap;text-align:center;">65% of the world's cocoa comes from <em>two countries.</em></h2>
+  <p class="map-sub" style="white-space:nowrap;font-size:clamp(11px,1.3vw,17px);text-align:center;width:100%;">Ivory Coast and Ghana together supply nearly two thirds of global cocoa production. This is where the chain starts.</p>
 
   <!-- Flourish map placeholder -->
   <div style="width:1104px;max-width:100%;">
@@ -512,8 +512,8 @@ body{font-family:'DM Sans',sans-serif;overflow-x:hidden;background:var(--cream);
   <div class="s3-scroll-panel p1" id="s3p1" style="justify-content:center">
     <div class="s3-text-col" style="text-align:center;max-width:600px;margin:0 auto">
       <div class="s3-eyebrow">Plight of the First Hands</div>
-      <div style="font-family:'Playfair Display',serif;font-size:3.2vw;font-weight:700;color:#FAF6EF;line-height:1.2;margin-bottom:10px;text-align:center;width:100%;display:block;">How much is <em style="font-style:normal;color:#FFD080;">$0.23</em> per bar?</div>
-      <div class="s3-body">A farmer needs cocoa from <strong>1,000 bars worth of pods</strong> to earn one day's living wage.</div>
+      <div style="font-family:'Playfair Display',serif;font-size:3.2vw;font-weight:700;color:#FAF6EF;line-height:1.2;margin-bottom:10px;text-align:center;width:100%;display:block;white-space:nowrap;">How much is <em style="font-style:normal;color:#FFD080;">$0.23</em> per bar?</div>
+      <div class="s3-body" style="white-space:nowrap;text-align:center;">A farmer needs cocoa from <strong>1,000 bars worth of pods</strong> to earn one day's living wage.</div>
 
       <!-- Key contrast stat callout -->
       <div style="display:flex;gap:16px;margin:20px 0;flex-wrap:wrap;">
